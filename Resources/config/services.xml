@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <defaults autowire="true" autoconfigure="true" public="false"/>
+
+        <service id="Igoooor\UserBundle\Factory\SuperAdminUserFactory">
+            <argument/> <!-- PasswordGenerator -->
+            <argument/> <!-- User Class -->
+        </service>
+
+        <service id="Igoooor\UserBundle\Utils\UserManipulator">
+            <argument/> <!-- UserRepositoryInterface -->
+            <argument/> <!-- User Class -->
+        </service>
+
+        <service id="Igoooor\UserBundle\Utils\PasswordGenerator"/>
+
+        <service id="Igoooor\UserBundle\Listener\HashPasswordListener">
+            <argument id="security.user_password_encoder.generic" type="service"/>
+            <tag name="doctrine.event_subscriber"></tag>
+        </service>
+
+        <service id="Igoooor\UserBundle\Command\CreateUserCommand">
+            <argument id="Igoooor\UserBundle\Utils\UserManipulator" type="service"/>
+            <argument id="Igoooor\UserBundle\Utils\PasswordGenerator" type="service"/>
+            <tag name="console.command"/>
+        </service>
+
+        <service id="Igoooor\UserBundle\Command\ChangePasswordCommand">
+            <argument id="Igoooor\UserBundle\Utils\UserManipulator" type="service"/>
+            <tag name="console.command"/>
+        </service>
+    </services>
+
+</container>

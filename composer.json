@@ -1,0 +1,16 @@
+{
+    "name": "igoooor/user-bundle",
+    "description": "User Components",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "require": {
+        "doctrine/orm": "^2.6.0",
+        "symfony/framework-bundle": "^4.3|^5.2",
+        "symfony/security-bundle": "^4.3|^5.2",
+        "symfony/serializer-pack": "*"
+    },
+    "autoload": {
+        "psr-4": { "Igoooor\\UserBundle\\": "" },
+        "exclude-from-classmap": ["/Tests/"]
+    }
+}
