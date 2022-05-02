@@ -24,12 +24,7 @@ interface UserRepositoryInterface
      */
     public function hasSuperAdmin(): bool;
 
-    /**
-     * @param mixed $object
-     *
-     * @throws ORMException
-     */
-    public function persist($object): void;
+    public function persist(...$entities): void;
 
     /**
      * Finds a single entity by a set of criteria.
