@@ -52,9 +52,7 @@ class UserManipulator
     {
         $class = $this->userClass;
         /** @var UserInterface $user */
-        $user = new $class();
-        $user->setEmail($email);
-        $user->setPlainPassword($password);
+        $user = $class::create($email, $password);
         foreach ($roles as $role) {
             $user->addRole($role);
         }
