@@ -59,7 +59,7 @@ class UserManipulator
             $user->addRole($role);
         }
 
-        $this->userRepository->persist($user);
+        $this->userRepository->save($user);
 
         return $user;
     }
@@ -76,7 +76,7 @@ class UserManipulator
     {
         $user = $this->findUserByEmailOrThrowException($email);
         $user->setPlainPassword($password);
-        $this->userRepository->persist($user);
+        $this->userRepository->save($user);
     }
 
     /**

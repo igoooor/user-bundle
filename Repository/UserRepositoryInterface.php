@@ -24,7 +24,7 @@ interface UserRepositoryInterface
      */
     public function hasSuperAdmin(): bool;
 
-    public function persist(...$entities): void;
+    public function save(...$entities): void;
 
     /**
      * Finds a single entity by a set of criteria.
