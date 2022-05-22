@@ -1,19 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: igorweigel
- * Date: 07.10.2019
- * Time: 05:36
- */
 
 namespace Igoooor\UserBundle\Model;
 
 use App\Entity\User;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface as BaseUserInterface;
 
-/**
- * Class UserInterface
- */
-interface UserInterface extends \Symfony\Component\Security\Core\User\UserInterface
+interface UserInterface extends BaseUserInterface, PasswordAuthenticatedUserInterface
 {
     public const ROLE_SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
     public const ROLE_ADMIN = 'ROLE_ADMIN';
