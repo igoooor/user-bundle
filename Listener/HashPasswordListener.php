@@ -11,7 +11,7 @@ namespace Igoooor\UserBundle\Listener;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Igoooor\UserBundle\Model\UserInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 /**
  * Class HashPasswordListener
@@ -19,18 +19,18 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class HashPasswordListener implements EventSubscriber
 {
     /**
-     * @var UserPasswordEncoderInterface
+     * @var UserPasswordHasherInterface
      */
-    private $passwordEncoder;
+    private $passwordHasher;
 
     /**
      * HashPasswordListener constructor.
      *
-     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param UserPasswordHasherInterface $passwordHasher
      */
-    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(UserPasswordHasherInterface $passwordHasher)
     {
-        $this->passwordEncoder = $passwordEncoder;
+        $this->passwordHasher = $passwordHasher;
     }
 
     /**
@@ -54,7 +54,7 @@ class HashPasswordListener implements EventSubscriber
             return;
         }
 
-        $this->encodePassword($entity);
+        $this->hashPassword($entity);
     }
 
     /**
@@ -67,7 +67,7 @@ class HashPasswordListener implements EventSubscriber
             return;
         }
 
-        $this->encodePassword($entity);
+        $this->hashPassword($entity);
         // necessary to force the update to see the change
         $em = $args->getEntityManager();
         $meta = $em->getClassMetadata(get_class($entity));
@@ -77,13 +77,13 @@ class HashPasswordListener implements EventSubscriber
     /**
      * @param UserInterface $entity
      */
-    private function encodePassword(UserInterface $entity): void
+    private function hashPassword(UserInterface $entity): void
     {
         $plainPassword = $entity->getPlainPassword();
         if (null === $plainPassword) {
             return;
         }
-        $encoded = $this->passwordEncoder->encodePassword(
+        $encoded = $this->passwordHasher->hashPassword(
             $entity,
             $plainPassword
         );

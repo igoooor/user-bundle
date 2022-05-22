@@ -20,7 +20,7 @@
         <service id="Igoooor\UserBundle\Utils\PasswordGenerator"/>
 
         <service id="Igoooor\UserBundle\Listener\HashPasswordListener">
-            <argument id="security.user_password_encoder.generic" type="service"/>
+            <argument id="security.user_password_hasher" type="service"/>
             <tag name="doctrine.event_subscriber"></tag>
         </service>
 
