@@ -62,7 +62,7 @@ EOT
      *
      * @throws \Doctrine\ORM\ORMException
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $email = $input->getArgument('email');
         $password = $input->getArgument('password');
@@ -71,7 +71,7 @@ EOT
 
         $output->writeln(sprintf('Changed password for user <comment>%s</comment>', $email));
 
-        return 0;
+        return Command::SUCCESS;
     }
 
     /**

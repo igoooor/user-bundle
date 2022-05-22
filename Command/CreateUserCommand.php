@@ -81,7 +81,7 @@ EOT
      *
      * @throws \Doctrine\ORM\ORMException
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $email = $input->getArgument('email');
         $password = $input->getArgument('password');
@@ -110,7 +110,7 @@ EOT
         }
 
 
-        return 0;
+        return Command::SUCCESS;
     }
 
     /**
